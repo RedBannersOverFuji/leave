@@ -330,7 +330,7 @@ button { border: none; background: none; cursor: pointer; }
   </div>
 
   <!-- ===== Share Button ===== -->
-  <div id="shareBtn" style="position:fixed;z-index:97;left:0;bottom:32vw;padding:2.66667vw 1.6vw;font-size:3.2vw;background:#3399fe;color:#fff;border-radius:0 1.6vw 1.6vw 0;line-height:1.3;box-shadow:0.53333vw 0 1.06667vw rgba(0,0,0,0.1);cursor:pointer;writing-mode:vertical-rl;letter-spacing:0.53333vw;user-select:none;">分享</div>
+  <div onclick="resetShare();document.getElementById('shareOverlay').style.display='flex';" style="position:fixed;z-index:97;left:0;bottom:32vw;padding:2.66667vw 1.6vw;font-size:3.2vw;background:#3399fe;color:#fff;border-radius:0 1.6vw 1.6vw 0;line-height:1.3;box-shadow:0.53333vw 0 1.06667vw rgba(0,0,0,0.1);cursor:pointer;writing-mode:vertical-rl;letter-spacing:0.53333vw;user-select:none;">分享</div>
 
   <!-- ===== Boya Service ===== -->
   <div class="boyaSevice" id="boyaBtn" title="智能客服"><img width="15" src="data:image/png;base64,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"> 智能客服 </div>
@@ -1106,13 +1106,13 @@ document.getElementById('exportBtn').addEventListener('click', async function(e)
 // ===== Share =====
 var shareFormat = null; // 'link' or 'card'
 
-function resetShare() {
+window.resetShare = function() {
   shareFormat = null;
   document.getElementById('shareTitle').textContent = '选择分享方式';
   document.getElementById('shareStep1').style.display = '';
   document.getElementById('shareStep2').style.display = 'none';
   document.getElementById('shareBack').style.display = 'none';
-}
+};
 
 document.getElementById('shareBtn').addEventListener('click', function(e){
   e.stopPropagation();
@@ -1185,15 +1185,23 @@ var CARD_URL  = 'https://redbannersoverfuji.github.io/leave/card.html?t=' + Date
 
 function shareToChannel(url, title, text) {
   document.getElementById('shareOverlay').style.display = 'none';
-  // Always copy link and let user paste - most reliable across all platforms
+  // Try system share sheet first (shows WeChat, QQ, etc.)
+  if (navigator.share) {
+    navigator.share({ title: title, text: text, url: url }).catch(function(){
+      // If share fails, fall back to copy
+      copyLink(url);
+    });
+  } else {
+    copyLink(url);
+  }
+}
+function copyLink(url) {
   var ta = document.createElement('textarea');
-  ta.value = url;
-  ta.style.position = 'fixed'; ta.style.opacity = '0';
-  document.body.appendChild(ta);
-  ta.select(); ta.focus();
-  document.execCommand('copy');
+  ta.value = url; ta.style.position = 'fixed'; ta.style.opacity = '0';
+  document.body.appendChild(ta); ta.select();
+  try { document.execCommand('copy'); showToast('链接已复制，请打开微信粘贴发送'); }
+  catch(e) { prompt('请复制此链接发送：', url); }
   document.body.removeChild(ta);
-  showToast('链接已复制，请打开微信粘贴发送');
 }
 
 document.getElementById('shareWechat').addEventListener('click', function(){
