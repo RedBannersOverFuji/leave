@@ -1143,13 +1143,26 @@ window.shareCardAsImage = function() {
   ctx.fillText('今日校园app', 140, 330);
   c.toBlob(function(blob) {
     var file = new File([blob], 'card.png', {type: 'image/png'});
+    // Try file share
     if (navigator.canShare && navigator.canShare({files: [file]})) {
-      navigator.share({title: '分享请假信息', files: [file]});
+      navigator.share({title: '分享请假信息', files: [file]}).catch(function(){
+        downloadCardImage(blob);
+      });
     } else {
-      showToast('请截图后发送给好友');
+      // Show image preview, user long-press to save
+      downloadCardImage(blob);
     }
   }, 'image/png');
 };
+
+function downloadCardImage(blob) {
+  var url = URL.createObjectURL(blob);
+  // Show preview overlay for user to long-press & share
+  var img = document.getElementById('previewImage');
+  img.src = url;
+  document.getElementById('imagePreview').style.display = 'flex';
+  showToast('长按图片保存后发送给好友');
+}
 
 window.resetShare = function() {
   window.shareFormat = null;
