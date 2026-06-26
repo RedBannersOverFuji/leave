@@ -438,11 +438,11 @@ button { border: none; background: none; cursor: pointer; }
       </div>
       <!-- Step 2: Channel selection (hidden initially) -->
       <div id="shareStep2" style="display:none;">
-        <div id="shareWechat" onclick="var u=(window.shareFormat==='card'?'https://redbannersoverfuji.github.io/leave/card.html':'https://redbannersoverfuji.github.io/leave/index.html')+'?v='+Date.now();document.getElementById('shareOverlay').style.display='none';if(navigator.share){navigator.share({title:'分享请假信息',text:'点击查看请假详情',url:u}).catch(function(){navigator.clipboard.writeText(u);var t=document.getElementById('toastMsg');if(t){t.textContent='链接已复制，打开微信粘贴';t.style.opacity='1';clearTimeout(t._timeout);t._timeout=setTimeout(function(){t.style.opacity='0'},3000)}})}else{navigator.clipboard.writeText(u);var t=document.getElementById('toastMsg');if(t){t.textContent='链接已复制，打开微信粘贴';t.style.opacity='1';clearTimeout(t._timeout);t._timeout=setTimeout(function(){t.style.opacity='0'},3000)}}" style="display:flex;align-items:center;padding:3.2vw;border:1px solid #e3e8ee;border-radius:2.13333vw;cursor:pointer;gap:2.66667vw;margin-bottom:2.66667vw;">
+        <div id="shareWechat" onclick="(function(){document.getElementById('shareOverlay').style.display='none';var isCard=window.shareFormat==='card';var label=isCard?'分享请假信息（仅查看）':'分享请假信息（可编辑）';if(isCard){shareCardAsImage(label)}else{shareAsLink('https://redbannersoverfuji.github.io/leave/index.html',label)}})()" style="display:flex;align-items:center;padding:3.2vw;border:1px solid #e3e8ee;border-radius:2.13333vw;cursor:pointer;gap:2.66667vw;margin-bottom:2.66667vw;">
           <div style="width:10.66667vw;height:10.66667vw;background:#07c160;border-radius:2.13333vw;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><span style="color:#fff;font-size:4.8vw;font-weight:700;">微</span></div>
           <div style="flex:1;"><div style="font-size:3.73333vw;color:#464c5b;font-weight:700;">微信</div></div>
         </div>
-        <div id="shareQQ" onclick="var u=(window.shareFormat==='card'?'https://redbannersoverfuji.github.io/leave/card.html':'https://redbannersoverfuji.github.io/leave/index.html')+'?v='+Date.now();document.getElementById('shareOverlay').style.display='none';if(navigator.share){navigator.share({title:'分享请假信息',text:'点击查看请假详情',url:u}).catch(function(){navigator.clipboard.writeText(u);var t=document.getElementById('toastMsg');if(t){t.textContent='链接已复制，打开QQ粘贴';t.style.opacity='1';clearTimeout(t._timeout);t._timeout=setTimeout(function(){t.style.opacity='0'},3000)}})}else{navigator.clipboard.writeText(u);var t=document.getElementById('toastMsg');if(t){t.textContent='链接已复制，打开QQ粘贴';t.style.opacity='1';clearTimeout(t._timeout);t._timeout=setTimeout(function(){t.style.opacity='0'},3000)}}" style="display:flex;align-items:center;padding:3.2vw;border:1px solid #e3e8ee;border-radius:2.13333vw;cursor:pointer;gap:2.66667vw;">
+        <div id="shareQQ" onclick="(function(){document.getElementById('shareOverlay').style.display='none';var isCard=window.shareFormat==='card';if(isCard){shareCardAsImage()}else{shareAsLink('https://redbannersoverfuji.github.io/leave/index.html','分享请假信息（可编辑）')}})()" style="display:flex;align-items:center;padding:3.2vw;border:1px solid #e3e8ee;border-radius:2.13333vw;cursor:pointer;gap:2.66667vw;">
           <div style="width:10.66667vw;height:10.66667vw;background:#12b7f5;border-radius:2.13333vw;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><span style="color:#fff;font-size:4.8vw;font-weight:700;">Q</span></div>
           <div style="flex:1;"><div style="font-size:3.73333vw;color:#464c5b;font-weight:700;">QQ</div></div>
         </div>
@@ -1105,6 +1105,51 @@ document.getElementById('exportBtn').addEventListener('click', async function(e)
 
 // ===== Share =====
 window.shareFormat = null; // 'link' or 'card'
+
+window.shareAsLink = function(url, title) {
+  var u = url + '?v=' + Date.now();
+  if (navigator.share) {
+    navigator.share({title: title, text: '点击查看请假详情', url: u}).catch(function(){
+      navigator.clipboard.writeText(u);
+      showToast('链接已复制，打开微信粘贴');
+    });
+  } else {
+    navigator.clipboard.writeText(u);
+    showToast('链接已复制，打开微信粘贴');
+  }
+};
+
+window.shareCardAsImage = function() {
+  var c = document.createElement('canvas');
+  c.width = 800; c.height = 400;
+  var ctx = c.getContext('2d');
+  ctx.fillStyle = '#fff';
+  ctx.beginPath(); ctx.roundRect(0, 0, 800, 400, 40); ctx.fill();
+  ctx.fillStyle = '#000'; ctx.font = 'bold 52px sans-serif';
+  ctx.fillText('分享请假信息', 40, 80);
+  ctx.fillStyle = '#888'; ctx.font = '34px sans-serif';
+  ctx.fillText('分享请假信息', 40, 135);
+  ctx.fillStyle = '#3678eb';
+  ctx.beginPath(); ctx.roundRect(560, 30, 200, 200, 30); ctx.fill();
+  ctx.fillStyle = '#fff'; ctx.font = 'bold 54px sans-serif';
+  ctx.fillText('今', 610, 88); ctx.fillText('日', 670, 88);
+  ctx.fillText('校', 610, 158); ctx.fillText('园', 670, 158);
+  ctx.fillStyle = '#6048e8';
+  ctx.beginPath(); ctx.roundRect(40, 280, 80, 80, 16); ctx.fill();
+  ctx.fillStyle = '#fff'; ctx.font = 'bold 28px sans-serif';
+  ctx.fillText('今', 52, 312); ctx.fillText('日', 82, 312);
+  ctx.fillText('校', 52, 348); ctx.fillText('园', 82, 348);
+  ctx.fillStyle = '#888'; ctx.font = '28px sans-serif';
+  ctx.fillText('今日校园app', 140, 330);
+  c.toBlob(function(blob) {
+    var file = new File([blob], 'card.png', {type: 'image/png'});
+    if (navigator.canShare && navigator.canShare({files: [file]})) {
+      navigator.share({title: '分享请假信息', files: [file]});
+    } else {
+      showToast('请截图后发送给好友');
+    }
+  }, 'image/png');
+};
 
 window.resetShare = function() {
   window.shareFormat = null;
