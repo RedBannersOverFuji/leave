@@ -148,7 +148,6 @@ button { border: none; background: none; cursor: pointer; }
       <div class="cat-status-flag no-shrink">
         <div class="flag-dom relative flag-success" id="flagDom">
           <span class="personal-info absolute" id="personalInfoBtn">个人信息 &gt;</span>
-          <span class="personal-info absolute" id="exportBtn" style="top:2.66667vw;left:5.33333vw;right:auto;">导出文件</span>
           <div class="flag-text">
             <div class="status-svg-text">
               <svg class="svg-icon" viewBox="0 0 24 24" fill="none" style="width:5.33333vw;height:5.33333vw;margin-right:1.33333vw;">
@@ -172,8 +171,10 @@ button { border: none; background: none; cursor: pointer; }
             <span id="shortNameText">泇斌</span>
           </div>
           <div class="flex-1 font-14">
-            <div class="font-dark"><span class="dbl-editable" data-field="userName" id="displayName"> 黄泇斌 </span></div>
-            <div class="font-normal"><span class="dbl-editable" data-field="userId" id="displayMeta"> 男生208240314 </span></div>
+            <div class="font-dark"><span class="dbl-editable" data-field="userName" id="displayName"> ***** </span></div>
+            <div class="font-normal">
+              <span class="dbl-editable" data-field="gender" id="displayGender" style="cursor:pointer;"> ***** </span><span class="dbl-editable" data-field="userId" id="displayUserId"> ***** </span>
+            </div>
           </div>
         </div>
       </div>
@@ -233,7 +234,7 @@ button { border: none; background: none; cursor: pointer; }
 
         <div class="flex mb-5 font-12 ai-start">
           <div class="font-light no-shrink row-label" style="width:16vw;"> 审批人： </div>
-          <div class="font-normal flex-1 ml-5 break-all"> 庾荷霄 </div>
+          <div class="font-normal flex-1 ml-5 break-all"><span class="dbl-editable" data-field="approver" id="displayApprover"> ***** </span></div>
         </div>
 
         <div class="flex mb-5 font-12 ai-start mb-5">
@@ -389,14 +390,15 @@ button { border: none; background: none; cursor: pointer; }
 
 // ===== Editable Data Store =====
 var DATA = {
-  userName: '黄泇斌',
-  userId: '208240314',
+  userName: '*****',
+  userId: '*****',
   gender: 1,
-  startTime: '06-25 21:00',
-  endTime: '06-28 20:00',
-  urgencyMobile: '13913486458',
-  leaveReason: '后面几天没考试了，回家休息',
-  destination: '江苏省/南京市/鼓楼区/天目路1-1'
+  startTime: '01-01 00:00',
+  endTime: '01-02 00:00',
+  urgencyMobile: '*****',
+  leaveReason: '*****',
+  destination: '*****',
+  approver: '*****'
 };
 
 // Load saved data from localStorage
@@ -439,8 +441,13 @@ function createInlineInput(field, value, span) {
   var isTextarea = (field === 'leaveReason');
 
   if (isDatetime) {
-    // Use a fixed overlay for datetime editing to avoid picker position issues
     showDatetimeOverlay(field, value, span);
+    return;
+  }
+
+  // Gender is a toggle, not a text input
+  if (field === 'gender') {
+    showGenderPicker(span);
     return;
   }
 
@@ -456,12 +463,77 @@ function createInlineInput(field, value, span) {
   activeField = field;
 }
 
+// ===== Gender Picker =====
+function showGenderPicker(span) {
+  // Replace span with a simple select-like UI
+  var wrapper = document.createElement('span');
+  wrapper.style.cssText = 'display:inline-flex;gap:1.06667vw;';
+
+  var maleBtn = document.createElement('span');
+  maleBtn.textContent = ' 男生 ';
+  maleBtn.style.cssText = 'display:inline-block;padding:0.8vw 2.66667vw;border-radius:1.06667vw;cursor:pointer;font-size:3.2vw;';
+  maleBtn.style.background = DATA.gender === 1 ? '#3399ff' : '#f5f7f9';
+  maleBtn.style.color = DATA.gender === 1 ? '#fff' : '#657180';
+
+  var femaleBtn = document.createElement('span');
+  femaleBtn.textContent = ' 女生 ';
+  femaleBtn.style.cssText = 'display:inline-block;padding:0.8vw 2.66667vw;border-radius:1.06667vw;cursor:pointer;font-size:3.2vw;';
+  femaleBtn.style.background = DATA.gender === 2 ? '#3399ff' : '#f5f7f9';
+  femaleBtn.style.color = DATA.gender === 2 ? '#fff' : '#657180';
+
+  maleBtn.addEventListener('click', function(e){
+    e.preventDefault();
+    e.stopPropagation();
+    DATA.gender = 1;
+    try { localStorage.setItem('leave_share_data', JSON.stringify(DATA)); } catch(e) {}
+    wrapper.parentNode.replaceChild(span, wrapper);
+    refreshAll();
+    autoExport();
+  });
+
+  femaleBtn.addEventListener('click', function(e){
+    e.preventDefault();
+    e.stopPropagation();
+    DATA.gender = 2;
+    try { localStorage.setItem('leave_share_data', JSON.stringify(DATA)); } catch(e) {}
+    wrapper.parentNode.replaceChild(span, wrapper);
+    refreshAll();
+    autoExport();
+  });
+
+  wrapper.appendChild(maleBtn);
+  wrapper.appendChild(femaleBtn);
+  span.parentNode.replaceChild(wrapper, span);
+
+  // Click outside to cancel
+  function cancelGender(e) {
+    if (!wrapper.contains(e.target)) {
+      wrapper.parentNode.replaceChild(span, wrapper);
+      document.removeEventListener('click', cancelGender);
+    }
+  }
+  setTimeout(function(){ document.addEventListener('click', cancelGender); }, 100);
+}
+
 function commitEdit() {
   if (!activeInput || !activeSpan || !activeField) return;
   var rawVal = activeInput.value.trim();
   var newVal = rawVal;
   if (activeField === 'startTime' || activeField === 'endTime') {
     newVal = fromDatetimeLocal(rawVal);
+  }
+  // Validate: leave reason must be more than 10 characters
+  if (activeField === 'leaveReason' && newVal.length <= 10) {
+    activeInput.style.border = '1px solid #ff4400';
+    activeInput.style.boxShadow = '0 0 1.06667vw rgba(255,68,0,0.3)';
+    showToast('请假原因不能少于10个字');
+    setTimeout(function(){
+      if (activeInput) {
+        activeInput.style.border = '1px solid #3399ff';
+        activeInput.style.boxShadow = '0 0 1.06667vw rgba(51,153,255,0.2)';
+      }
+    }, 2000);
+    return;
   }
   if (newVal && DATA[activeField] !== undefined) {
     DATA[activeField] = newVal;
@@ -483,6 +555,21 @@ function cancelEdit() {
   activeInput = null;
   activeSpan = null;
   activeField = null;
+}
+
+// ===== Toast Notification =====
+function showToast(msg) {
+  var t = document.getElementById('toastMsg');
+  if (!t) {
+    t = document.createElement('div');
+    t.id = 'toastMsg';
+    t.style.cssText = 'position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:rgba(0,0,0,0.8);color:#fff;padding:3.2vw 5.33333vw;border-radius:2.13333vw;font-size:3.73333vw;z-index:9999;pointer-events:none;transition:opacity 0.3s;white-space:nowrap;';
+    document.body.appendChild(t);
+  }
+  t.textContent = msg;
+  t.style.opacity = '1';
+  clearTimeout(t._timeout);
+  t._timeout = setTimeout(function(){ t.style.opacity = '0'; }, 2500);
 }
 
 // Bind double-click on all editable spans
@@ -619,17 +706,23 @@ function refreshAll() {
 
   // Short name
   var sn = document.getElementById('shortNameText');
-  if (sn) sn.textContent = d.userName.slice(-2);
+  if (sn) sn.textContent = (d.userName || '**').slice(-2);
 
   // User bar
   var dn = document.getElementById('displayName');
   if (dn) dn.textContent = ' ' + d.userName + ' ';
-  var dm = document.getElementById('displayMeta');
-  if (dm) dm.textContent = ' ' + genderName + d.userId + ' ';
+  var dg = document.getElementById('displayGender');
+  if (dg) dg.textContent = ' ' + genderName + ' ';
+  var du = document.getElementById('displayUserId');
+  if (du) du.textContent = ' ' + d.userId + ' ';
 
   // Leave title
   var lt = document.getElementById('leaveTitle');
   if (lt) lt.textContent = ' 我的 请假申请 ';
+
+  // Approver display
+  var da = document.getElementById('displayApprover');
+  if (da) da.textContent = ' ' + DATA.approver + ' ';
 
   // View-mode spans
   document.querySelectorAll('.view-mode').forEach(function(span){
@@ -775,9 +868,10 @@ function buildHtmlBlob() {
     "  endTime: '" + DATA.endTime + "',\n" +
     "  urgencyMobile: '" + DATA.urgencyMobile + "',\n" +
     "  leaveReason: '" + DATA.leaveReason.replace(/'/g, "\\'") + "',\n" +
-    "  destination: '" + DATA.destination + "'";
+    "  destination: '" + DATA.destination + "',\n" +
+    "  approver: '" + DATA.approver + "'";
   html = html.replace(
-    /userName: '[^']*',\s*\n\s*userId: '[^']*',\s*\n\s*gender: \d+,\s*\n\s*startTime: '[^']*',\s*\n\s*endTime: '[^']*',\s*\n\s*urgencyMobile: '[^']*',\s*\n\s*leaveReason: '[^']*',\s*\n\s*destination: '[^']*'/,
+    /userName: '[^']*',\s*\n\s*userId: '[^']*',\s*\n\s*gender: \d+,\s*\n\s*startTime: '[^']*',\s*\n\s*endTime: '[^']*',\s*\n\s*urgencyMobile: '[^']*',\s*\n\s*leaveReason: '[^']*',\s*\n\s*destination: '[^']*',\s*\n\s*approver: '[^']*'/,
     newDataStr
   );
   return new Blob(['<!DOCTYPE html>\n' + html.substring(html.indexOf('<html'))], {type: 'text/html;charset=utf-8'});
