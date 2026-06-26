@@ -1050,34 +1050,35 @@ function buildReadonlyCard() {
   var d = DATA;
   var gn = d.gender === 2 ? '女生' : '男生';
   var diff = calcTimeDiff(d.startTime, d.endTime) || '—';
-  var html =
-'<!DOCTYPE html>\n<html lang="zh-CN">\n<head>\n<meta charset="utf-8">\n<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0">\n<title>分享请假信息</title>\n'+
+  var html = '<!DOCTYPE html>\n<html lang="zh-CN">\n<head>\n<meta charset="utf-8">\n<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0">\n<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">\n<meta http-equiv="Pragma" content="no-cache">\n<meta http-equiv="Expires" content="0">\n<title>分享请假信息</title>\n'+
 '<style>\n'+
-'*{box-sizing:border-box;margin:0;padding:0}\n'+
-'body{background:#f5f5f5;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Helvetica Neue","Microsoft Yahei",sans-serif;min-height:100vh;padding:4vw}\n'+
-'.card{background:#fff;border-radius:4vw;padding:5.33333vw;margin-bottom:4vw;box-shadow:0 1px 4px rgba(0,0,0,.04)}\n'+
-'.top-row{display:flex;align-items:flex-start;justify-content:space-between}\n'+
-'.left{flex:1;padding-top:1vw}\n'+
-'.title{font-size:5.86667vw;font-weight:800;color:#000;margin-bottom:2.13333vw}\n'+
-'.subtitle{font-size:3.73333vw;color:#888}\n'+
-'.right{margin-left:4vw;flex-shrink:0}\n'+
-'.big-box{width:22.4vw;height:22.4vw;background:#3678eb;border-radius:3.73333vw;display:flex;justify-content:center;align-items:center;gap:1vw}\n'+
-'.vcol{display:flex;writing-mode:vertical-lr;color:#fff;font-size:5.33333vw;font-weight:800;letter-spacing:1vw;line-height:1}\n'+
-'.bottom-row{display:flex;align-items:center;margin-top:5.33333vw}\n'+
-'.small-box{width:10.13333vw;height:10.13333vw;background:#6048e8;border-radius:2.13333vw;display:flex;justify-content:center;align-items:center;gap:0.5vw;flex-shrink:0}\n'+
-'.small-box .vcol{font-size:3.2vw;font-weight:700;letter-spacing:0.5vw}\n'+
-'.app-label{font-size:3.2vw;color:#888;margin-left:2.13333vw}\n'+
-'.detail{background:#fff;border-radius:4vw;padding:5.33333vw;box-shadow:0 1px 4px rgba(0,0,0,.04)}\n'+
-'.detail-title{font-size:4.26667vw;font-weight:700;color:#464c5b;margin-bottom:2.66667vw}\n'+
-'.row{display:flex;margin-bottom:1.33333vw;font-size:3.2vw}\n'+
-'.row-label{color:#9ea7b4;flex-shrink:0;white-space:nowrap}\n'+
-'.row-value{color:#657180;margin-left:1.33333vw;flex:1;word-break:break-all}\n'+
-'.badge{background:rgba(51,153,255,.1);border:1px solid #91c3fd;color:#3399ff;border-radius:1vw;padding:1vw 2.66667vw;font-size:3.73333vw;font-weight:700;display:inline-block;margin-bottom:2.66667vw}\n'+
-'.user-bar{display:flex;align-items:center;padding:2.66667vw 0;border-bottom:1px solid #e3e8ee;margin-bottom:2.66667vw}\n'+
-'.avatar{width:12.8vw;height:12.8vw;background:#3399ff;border-radius:50%;color:#fff;font-size:3.73333vw;display:flex;align-items:center;justify-content:center;margin-right:2.66667vw;flex-shrink:0}\n'+
-'.disclaimer{color:#f90;font-size:3.2vw;text-align:justify;word-break:break-all;margin-top:2.66667vw;padding-top:2.66667vw;border-top:1px solid #e3e8ee}\n'+
+'*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}\n'+
+'body{background:#f5f5f5;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Helvetica Neue","Microsoft Yahei",sans-serif;display:flex;flex-direction:column;align-items:center;min-height:100vh;padding:4vw}\n'+
+'.card{display:flex;flex-wrap:wrap;align-items:flex-start;background:#fff;border-radius:4vw;padding:5.33333vw;width:100%;max-width:580px;cursor:pointer;text-decoration:none;user-select:none;-webkit-tap-highlight-color:transparent;box-shadow:0 0.53333vw 2.66667vw rgba(0,0,0,0.04);transition:box-shadow 0.15s;}\n'+
+'.card:active{box-shadow:0 1.06667vw 4vw rgba(0,0,0,0.08)}\n'+
+'.top-row{display:flex;align-items:flex-start;justify-content:space-between;width:100%}\n'+
+'.left{display:flex;flex-direction:column;flex:1;padding-top:1.06667vw}\n'+
+'.title{font-size:5.86667vw;font-weight:800;color:#000;letter-spacing:0.26667vw;line-height:1.2;margin-bottom:2.13333vw}\n'+
+'.subtitle{font-size:3.73333vw;color:#888;letter-spacing:0.26667vw;line-height:1.2}\n'+
+'.right{flex-shrink:0;margin-left:4vw}\n'+
+'.big-box{width:22.4vw;height:22.4vw;background:#3678eb;border-radius:3.73333vw;display:flex;justify-content:center;align-items:center;gap:1.06667vw}\n'+
+'.vcol{display:flex;writing-mode:vertical-lr;color:#fff;font-size:5.33333vw;font-weight:800;letter-spacing:1.06667vw;line-height:1;user-select:none}\n'+
+'.bottom-row{display:flex;align-items:center;width:100%;margin-top:5.33333vw}\n'+
+'.small-box{width:10.13333vw;height:10.13333vw;background:#6048e8;border-radius:2.13333vw;display:flex;justify-content:center;align-items:center;gap:0.53333vw;flex-shrink:0}\n'+
+'.small-box .vcol{font-size:3.2vw;font-weight:700;letter-spacing:0.53333vw}\n'+
+'.app-label{font-size:3.2vw;color:#888;margin-left:2.13333vw;letter-spacing:0.13333vw}\n'+
+'.detail{background:#fff;border-radius:4vw;padding:5.33333vw;margin-top:4vw;width:100%;max-width:580px;box-shadow:0 0.53333vw 2.66667vw rgba(0,0,0,0.04)}\n'+
+'.detail .badge{background:rgba(51,153,255,.1);border:1px solid #91c3fd;color:#3399ff;border-radius:1.06667vw;padding:1.33333vw 2.66667vw;font-size:3.73333vw;font-weight:700;display:inline-block;margin-bottom:2.66667vw}\n'+
+'.detail .user-bar{display:flex;align-items:center;padding:2.66667vw 0;border-bottom:1px solid #e3e8ee;margin-bottom:2.66667vw}\n'+
+'.detail .avatar{width:12.8vw;height:12.8vw;background:#3399ff;border-radius:50%;color:#fff;font-size:3.73333vw;display:flex;align-items:center;justify-content:center;margin-right:2.66667vw;flex-shrink:0}\n'+
+'.detail .section-title{font-size:4.26667vw;font-weight:700;color:#464c5b;margin-bottom:2.66667vw}\n'+
+'.detail .row{display:flex;margin-bottom:1.33333vw;font-size:3.2vw}\n'+
+'.detail .row-label{color:#9ea7b4;flex-shrink:0;white-space:nowrap}\n'+
+'.detail .row-value{color:#657180;margin-left:1.33333vw;flex:1;word-break:break-all}\n'+
+'.detail .disclaimer{color:#f90;font-size:3.2vw;text-align:justify;word-break:break-all;margin-top:2.66667vw;padding-top:2.66667vw;border-top:1px solid #e3e8ee}\n'+
+'.footer-note{text-align:center;padding:4vw;color:#c3cbd6;font-size:3.2vw}\n'+
 '</style>\n</head>\n<body>\n\n'+
-'<div class="card">\n'+
+'<div class="card" id="showDetail">\n'+
 '  <div class="top-row">\n'+
 '    <div class="left"><div class="title">分享请假信息</div><div class="subtitle">分享请假信息</div></div>\n'+
 '    <div class="right"><div class="big-box"><div class="vcol">今校</div><div class="vcol">日园</div></div></div>\n'+
@@ -1087,15 +1088,12 @@ function buildReadonlyCard() {
 '    <span class="app-label">今日校园app</span>\n'+
 '  </div>\n'+
 '</div>\n\n'+
-'<div class="detail">\n'+
+'<div class="detail" id="detailSection">\n'+
 '  <div class="user-bar">\n'+
 '    <div class="avatar">' + d.userName.slice(-2) + '</div>\n'+
-'    <div>\n'+
-'      <div style="font-size:3.73333vw;color:#464c5b;">' + d.userName + '</div>\n'+
-'      <div style="font-size:3.2vw;color:#657180;margin-top:0.53333vw;">' + gn + ' ' + d.userId + '</div>\n'+
-'    </div>\n'+
+'    <div><div style="font-size:3.73333vw;color:#464c5b;">' + d.userName + '</div><div style="font-size:3.2vw;color:#657180;margin-top:0.53333vw;">' + gn + ' ' + d.userId + '</div></div>\n'+
 '  </div>\n'+
-'  <div class="detail-title">请假详情</div>\n'+
+'  <div class="section-title">请假详情</div>\n'+
 '  <div class="badge">' + diff + '</div>\n'+
 '  <div class="row"><span class="row-label">开始时间：</span><span class="row-value">' + d.startTime + '</span></div>\n'+
 '  <div class="row"><span class="row-label">结束时间：</span><span class="row-value">' + d.endTime + '</span></div>\n'+
@@ -1107,7 +1105,8 @@ function buildReadonlyCard() {
 '  <div class="row"><span class="row-label">请假状态：</span><span class="row-value" style="color:#00cc66;">审批通过</span></div>\n'+
 '  <div class="disclaimer">本人承诺填写的信息真实有效，并对本次提交请假申请信息的真实性负责。</div>\n'+
 '</div>\n\n'+
-'<div style="text-align:center;padding:4vw;color:#c3cbd6;font-size:3.2vw;">此页面仅可查看，不可编辑</div>\n\n'+
+'<div class="footer-note">此页面仅可查看，不可编辑</div>\n\n'+
+'<script>document.getElementById("showDetail").addEventListener("click",function(){document.getElementById("detailSection").scrollIntoView({behavior:"smooth"})});\x3c/script>\n'+
 '</body>\n</html>';
   return new Blob([html], {type:'text/html;charset=utf-8'});
 }
