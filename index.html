@@ -379,6 +379,19 @@ button { border: none; background: none; cursor: pointer; }
   </div>
 </div>
 
+<!-- ===== Warning Dialog ===== -->
+<div class="van-dialog__mask" id="warningOverlay" style="display:none;">
+  <div class="van-dialog__box" style="width:82%;">
+    <div class="van-dialog__header" style="color:#f40;">⚠ 警告</div>
+    <div class="van-dialog__body" style="font-size:3.73333vw;color:#464c5b;line-height:1.6;text-align:center;">
+      严禁利用该网站进行伪造假条<br>请遵守校规校纪<br>否则后果自负
+    </div>
+    <div class="van-dialog__footer">
+      <button class="van-dialog__confirm" id="closeWarning" style="flex:1;">我已了解</button>
+    </div>
+  </div>
+</div>
+
 <!-- ===== Setup Wizard ===== -->
 <div class="van-dialog__mask" id="wizardOverlay" style="display:none;">
   <div class="van-dialog__box" style="width:85%;">
@@ -1416,8 +1429,27 @@ document.getElementById('wizardOverlay').addEventListener('click', function(e){
   if (e.target === this && wizardIdx === 0) return; // don't close on first step
 });
 
-// Auto-show wizard on load if data is empty
-if (shouldShowWizard()) {
+// Warning dialog on first visit
+function showWarning() {
+  var warned = localStorage.getItem('leave_warning_ack');
+  if (warned) return false;
+  document.getElementById('warningOverlay').style.display = 'flex';
+  return true;
+}
+document.getElementById('closeWarning').addEventListener('click', function(){
+  document.getElementById('warningOverlay').style.display = 'none';
+  localStorage.setItem('leave_warning_ack', '1');
+  // After warning, check if wizard needed
+  if (shouldShowWizard()) { setTimeout(showWizard, 300); }
+});
+document.getElementById('warningOverlay').addEventListener('click', function(e){
+  if (e.target === this) return; // don't close by clicking mask
+});
+
+// Auto-show warning on load
+if (showWarning()) {
+  // Wizard will be triggered after user acknowledges warning
+} else if (shouldShowWizard()) {
   setTimeout(showWizard, 500);
 }
 
