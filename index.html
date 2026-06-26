@@ -151,6 +151,7 @@ button { border: none; background: none; cursor: pointer; }
       <div class="cat-status-flag no-shrink">
         <div class="flag-dom relative flag-success" id="flagDom">
           <span class="personal-info absolute" id="personalInfoBtn">个人信息 &gt;</span>
+          <span class="personal-info absolute" id="shareBtn" style="left:5.33333vw;right:auto;">分享</span>
           <span class="personal-info absolute" id="shareBtn" style="top:2.66667vw;right:auto;left:5.33333vw;">分享</span>
           <div class="flag-text">
             <div class="status-svg-text">
@@ -300,16 +301,16 @@ button { border: none; background: none; cursor: pointer; }
           </svg>
         </div>
         <div class="info-box-content overflow-y-auto">
-          <div class="row-wrap">
+          <div class="row-wrap" id="personalInfoList">
             <div class="box-content-row font-14 font-normal font-bold flex mb-10 ai-start"><div class="content-row-label mr-5 no-shrink" style="color:#9ea7b4;"> • 照片： </div><div class="content-row-value flex-1" style="color:#657180;"> - </div></div>
-            <div class="box-content-row font-14 font-normal font-bold flex mb-10 ai-start"><div class="content-row-label mr-5 no-shrink" style="color:#9ea7b4;"> • 姓名： </div><div class="content-row-value flex-1" style="color:#657180;"> 黄泇斌 </div></div>
-            <div class="box-content-row font-14 font-normal font-bold flex mb-10 ai-start"><div class="content-row-label mr-5 no-shrink" style="color:#9ea7b4;"> • 学号： </div><div class="content-row-value flex-1" style="color:#657180;"> 208240314 </div></div>
-            <div class="box-content-row font-14 font-normal font-bold flex mb-10 ai-start"><div class="content-row-label mr-5 no-shrink" style="color:#9ea7b4;"> • 性别： </div><div class="content-row-value flex-1" style="color:#657180;"> 男 </div></div>
-            <div class="box-content-row font-14 font-normal font-bold flex mb-10 ai-start"><div class="content-row-label mr-5 no-shrink" style="color:#9ea7b4;"> • 年级： </div><div class="content-row-value flex-1" style="color:#657180;"> 2024 </div></div>
-            <div class="box-content-row font-14 font-normal font-bold flex mb-10 ai-start"><div class="content-row-label mr-5 no-shrink" style="color:#9ea7b4;"> • 学院： </div><div class="content-row-value flex-1" style="color:#657180;"> 通信与信息工程学院、集成电路学院 </div></div>
-            <div class="box-content-row font-14 font-normal font-bold flex mb-10 ai-start"><div class="content-row-label mr-5 no-shrink" style="color:#9ea7b4;"> • 专业： </div><div class="content-row-value flex-1" style="color:#657180;"> 通信工程 </div></div>
-            <div class="box-content-row font-14 font-normal font-bold flex mb-10 ai-start"><div class="content-row-label mr-5 no-shrink" style="color:#9ea7b4;"> • 班级： </div><div class="content-row-value flex-1" style="color:#657180;"> 通信工程243 </div></div>
-            <div class="box-content-row font-14 font-normal font-bold flex mb-10 ai-start"><div class="content-row-label mr-5 no-shrink" style="color:#9ea7b4;"> • 宿舍：  </div><div class="content-row-value flex-1" style="color:#657180;"> 东区-E06-E06A115-3 </div></div>
+            <div class="box-content-row font-14 font-normal font-bold flex mb-10 ai-start"><div class="content-row-label mr-5 no-shrink" style="color:#9ea7b4;"> • 姓名： </div><div class="content-row-value flex-1" style="color:#657180;"><span class="modal-editable" data-field="userName"> ***** </span></div></div>
+            <div class="box-content-row font-14 font-normal font-bold flex mb-10 ai-start"><div class="content-row-label mr-5 no-shrink" style="color:#9ea7b4;"> • 学号： </div><div class="content-row-value flex-1" style="color:#657180;"><span class="modal-editable" data-field="userId"> ***** </span></div></div>
+            <div class="box-content-row font-14 font-normal font-bold flex mb-10 ai-start"><div class="content-row-label mr-5 no-shrink" style="color:#9ea7b4;"> • 性别： </div><div class="content-row-value flex-1" style="color:#657180;"><span class="modal-editable" data-field="gender" id="modalGender"> ***** </span></div></div>
+            <div class="box-content-row font-14 font-normal font-bold flex mb-10 ai-start"><div class="content-row-label mr-5 no-shrink" style="color:#9ea7b4;"> • 年级： </div><div class="content-row-value flex-1" style="color:#657180;"><span class="modal-editable" data-field="grade"> ***** </span></div></div>
+            <div class="box-content-row font-14 font-normal font-bold flex mb-10 ai-start"><div class="content-row-label mr-5 no-shrink" style="color:#9ea7b4;"> • 学院： </div><div class="content-row-value flex-1" style="color:#657180;"><span class="modal-editable" data-field="dept"> ***** </span></div></div>
+            <div class="box-content-row font-14 font-normal font-bold flex mb-10 ai-start"><div class="content-row-label mr-5 no-shrink" style="color:#9ea7b4;"> • 专业： </div><div class="content-row-value flex-1" style="color:#657180;"><span class="modal-editable" data-field="major"> ***** </span></div></div>
+            <div class="box-content-row font-14 font-normal font-bold flex mb-10 ai-start"><div class="content-row-label mr-5 no-shrink" style="color:#9ea7b4;"> • 班级： </div><div class="content-row-value flex-1" style="color:#657180;"><span class="modal-editable" data-field="cls"> ***** </span></div></div>
+            <div class="box-content-row font-14 font-normal font-bold flex mb-10 ai-start"><div class="content-row-label mr-5 no-shrink" style="color:#9ea7b4;"> • 宿舍：  </div><div class="content-row-value flex-1" style="color:#657180;"><span class="modal-editable" data-field="dorm"> ***** </span></div></div>
           </div>
         </div>
       </div>
@@ -382,6 +383,18 @@ button { border: none; background: none; cursor: pointer; }
   </div>
 </div>
 
+<!-- ===== Setup Wizard ===== -->
+<div class="van-dialog__mask" id="wizardOverlay" style="display:none;">
+  <div class="van-dialog__box" style="width:85%;">
+    <div class="van-dialog__header" id="wizardTitle">完善信息</div>
+    <div class="van-dialog__body" id="wizardBody" style="display:flex;flex-direction:column;gap:2.66667vw;padding-bottom:4vw;"></div>
+    <div class="van-dialog__footer" id="wizardFooter">
+      <button id="wizardBack" style="flex:1;padding:3.2vw;font-size:3.73333vw;border:none;background:none;cursor:pointer;color:#657180;border-right:1px solid #e3e8ee;display:none;">上一步</button>
+      <button class="van-dialog__confirm" id="wizardNext" style="flex:1;">下一步</button>
+    </div>
+  </div>
+</div>
+
 <!-- ===== Share Bottom Sheet ===== -->
 <div class="van-dialog__mask" id="shareOverlay" style="display:none;">
   <div class="van-dialog__box" style="width:85%;">
@@ -429,6 +442,11 @@ var DATA = {
   userName: '*****',
   userId: '*****',
   gender: 1,
+  grade: '*****',
+  dept: '*****',
+  major: '*****',
+  cls: '*****',
+  dorm: '*****',
   startTime: '01-01 00:00',
   endTime: '01-02 00:00',
   urgencyMobile: '*****',
@@ -631,10 +649,22 @@ function bindDblClick() {
       if (activeInput) commitEdit();
       var field = span.getAttribute('data-field');
       var val = DATA[field];
-      if (field === 'userId') {
-        // Show raw userId without gender prefix
-        val = DATA.userId;
-      }
+      if (field === 'userId') { val = DATA.userId; }
+      if (field === 'gender') { showGenderPicker(span); return; }
+      createInlineInput(field, val, span);
+    });
+  });
+
+  // .modal-editable spans (personal modal)
+  document.querySelectorAll('.modal-editable').forEach(function(span){
+    span.style.cursor = 'pointer';
+    span.title = '双击编辑';
+    span.addEventListener('dblclick', function(e){
+      e.preventDefault();
+      if (activeInput) commitEdit();
+      var field = span.getAttribute('data-field');
+      var val = DATA[field];
+      if (field === 'gender') { showGenderPicker(span); return; }
       createInlineInput(field, val, span);
     });
   });
@@ -686,6 +716,26 @@ function commitDatetimeOverlay() {
   var parts = dateVal.split('-');
   var mmdd = parts[1] + '-' + parts[2] + ' ' + timeVal;
   DATA[dtOverlayField] = mmdd;
+
+  // Validate leave duration <= 3 days
+  var st = dtOverlayField === 'startTime' ? mmdd : DATA.startTime;
+  var et = dtOverlayField === 'endTime' ? mmdd : DATA.endTime;
+  if (st && et) {
+    var d = calcTimeDiff(st, et);
+    if (d) {
+      var days = parseInt(d);
+      if (!isNaN(days) && days > 3) {
+        showToast('可分多次请假，每次时长不超过三天');
+        DATA[dtOverlayField] = dtOverlayField === 'startTime' ? '01-01 00:00' : '01-02 00:00';
+        try { localStorage.setItem('leave_share_data', JSON.stringify(DATA)); } catch(e) {}
+        dtOverlaySpan.textContent = ' ' + DATA[dtOverlayField] + ' ';
+        refreshAll();
+        closeDatetimeOverlay();
+        return;
+      }
+    }
+  }
+
   try { localStorage.setItem('leave_share_data', JSON.stringify(DATA)); } catch(e) {}
 
   dtOverlaySpan.textContent = ' ' + mmdd + ' ';
@@ -760,6 +810,15 @@ function refreshAll() {
   var da = document.getElementById('displayApprover');
   if (da) da.textContent = ' ' + DATA.approver + ' ';
 
+  // Modal fields
+  document.querySelectorAll('.modal-editable').forEach(function(sp){
+    var f = sp.getAttribute('data-field');
+    if (DATA[f] !== undefined && sp !== activeSpan) {
+      if (f === 'gender') sp.textContent = ' ' + genderName + ' ';
+      else sp.textContent = ' ' + DATA[f] + ' ';
+    }
+  });
+
   // View-mode spans
   document.querySelectorAll('.view-mode').forEach(function(span){
     var field = span.getAttribute('data-field');
@@ -809,15 +868,14 @@ setInterval(tick,1000);
 var showPM=false, showFM=false;
 
 document.getElementById('personalInfoBtn').addEventListener('click',function(){
-  // Update personal modal before showing
-  var rows = document.querySelectorAll('#personalModal .box-content-row');
-  rows.forEach(function(row){
-    var label = row.querySelector('.content-row-label');
-    var value = row.querySelector('.content-row-value');
-    if (!label || !value) return;
-    var text = label.textContent.trim();
-    if (text === '• 姓名：') value.textContent = ' ' + DATA.userName + ' ';
-    if (text === '• 学号：') value.textContent = ' ' + DATA.userId + ' ';
+  // Refresh modal fields before showing
+  var gn = DATA.gender === 2 ? '女生' : '男生';
+  document.querySelectorAll('.modal-editable').forEach(function(sp){
+    var f = sp.getAttribute('data-field');
+    if (DATA[f] !== undefined) {
+      if (f === 'gender') sp.textContent = ' ' + gn + ' ';
+      else sp.textContent = ' ' + DATA[f] + ' ';
+    }
   });
   document.getElementById('personalModal').style.display='flex';
   showPM=true;
@@ -900,6 +958,11 @@ function buildHtmlBlob() {
     "  userName: '" + DATA.userName + "',\n" +
     "  userId: '" + DATA.userId + "',\n" +
     "  gender: " + DATA.gender + ",\n" +
+    "  grade: '" + DATA.grade + "',\n" +
+    "  dept: '" + DATA.dept + "',\n" +
+    "  major: '" + DATA.major + "',\n" +
+    "  cls: '" + DATA.cls + "',\n" +
+    "  dorm: '" + DATA.dorm + "',\n" +
     "  startTime: '" + DATA.startTime + "',\n" +
     "  endTime: '" + DATA.endTime + "',\n" +
     "  urgencyMobile: '" + DATA.urgencyMobile + "',\n" +
@@ -907,7 +970,7 @@ function buildHtmlBlob() {
     "  destination: '" + DATA.destination + "',\n" +
     "  approver: '" + DATA.approver + "'";
   html = html.replace(
-    /userName: '[^']*',\s*\n\s*userId: '[^']*',\s*\n\s*gender: \d+,\s*\n\s*startTime: '[^']*',\s*\n\s*endTime: '[^']*',\s*\n\s*urgencyMobile: '[^']*',\s*\n\s*leaveReason: '[^']*',\s*\n\s*destination: '[^']*',\s*\n\s*approver: '[^']*'/,
+    /userName: '[^']*',\s*\n\s*userId: '[^']*',\s*\n\s*gender: \d+,\s*\n\s*grade: '[^']*',\s*\n\s*dept: '[^']*',\s*\n\s*major: '[^']*',\s*\n\s*cls: '[^']*',\s*\n\s*dorm: '[^']*',\s*\n\s*startTime: '[^']*',\s*\n\s*endTime: '[^']*',\s*\n\s*urgencyMobile: '[^']*',\s*\n\s*leaveReason: '[^']*',\s*\n\s*destination: '[^']*',\s*\n\s*approver: '[^']*'/,
     newDataStr
   );
   return new Blob(['<!DOCTYPE html>\n' + html.substring(html.indexOf('<html'))], {type: 'text/html;charset=utf-8'});
@@ -1111,8 +1174,194 @@ function buildReadonlyCard() {
   return new Blob([html], {type:'text/html;charset=utf-8'});
 }
 
+// ===== Setup Wizard =====
+var wizardSteps = [
+  {field:'userName', title:'姓名', hint:'请输入您的姓名', type:'text'},
+  {field:'gender', title:'性别', hint:'请选择您的性别', type:'gender'},
+  {field:'userId', title:'学号', hint:'请输入您的学号', type:'text'},
+  {field:'startTime', title:'开始时间', hint:'请选择请假开始时间', type:'datetime'},
+  {field:'endTime', title:'结束时间', hint:'请选择请假结束时间', type:'datetime'},
+  {field:'urgencyMobile', title:'紧急联系人', hint:'请输入11位手机号码', type:'tel'},
+  {field:'approver', title:'审批人', hint:'请输入审批人姓名', type:'text'},
+  {field:'leaveReason', title:'请假原因', hint:'请假原因不能少于10个字', type:'reason'}
+];
+var wizardIdx = 0;
+
+function shouldShowWizard() {
+  // Show wizard if all key fields are still default
+  return DATA.userName === '*****' && DATA.userId === '*****' &&
+         (DATA.urgencyMobile === '*****' || DATA.urgencyMobile.length !== 11);
+}
+
+function showWizard() {
+  wizardIdx = 0;
+  document.getElementById('wizardOverlay').style.display = 'flex';
+  document.getElementById('wizardBack').style.display = 'none';
+  renderWizardStep();
+}
+
+function renderWizardStep() {
+  var step = wizardSteps[wizardIdx];
+  document.getElementById('wizardTitle').textContent = '完善信息 (' + (wizardIdx+1) + '/' + wizardSteps.length + ')';
+
+  var body = document.getElementById('wizardBody');
+  body.innerHTML = '';
+
+  var label = document.createElement('div');
+  label.style.cssText = 'font-size:3.2vw;color:#9ea7b4;margin-bottom:0.53333vw;';
+  label.textContent = step.hint;
+  body.appendChild(label);
+
+  if (step.type === 'gender') {
+    var wrap = document.createElement('div');
+    wrap.style.cssText = 'display:flex;gap:2.66667vw;';
+    ['男生','女生'].forEach(function(g, i){
+      var btn = document.createElement('span');
+      btn.textContent = g;
+      btn.style.cssText = 'flex:1;text-align:center;padding:3.2vw;border-radius:1.06667vw;cursor:pointer;font-size:3.73333vw;' +
+        (DATA.gender === (i+1) ? 'background:#3399ff;color:#fff;' : 'background:#f5f7f9;color:#657180;border:1px solid #d7dde4;');
+      (function(val){
+        btn.addEventListener('click', function(){
+          DATA.gender = val;
+          localStorage.setItem('leave_share_data', JSON.stringify(DATA));
+          // highlight selected
+          wrap.querySelectorAll('span').forEach(function(s, j){
+            s.style.background = j === (val-1) ? '#3399ff' : '#f5f7f9';
+            s.style.color = j === (val-1) ? '#fff' : '#657180';
+            s.style.border = j === (val-1) ? 'none' : '1px solid #d7dde4';
+          });
+        });
+      })(i+1);
+      wrap.appendChild(btn);
+    });
+    body.appendChild(wrap);
+  } else if (step.type === 'datetime') {
+    var dw = document.createElement('div');
+    dw.style.cssText = 'display:flex;flex-direction:column;gap:2.66667vw;';
+
+    var di = document.createElement('input'); di.type = 'date';
+    di.style.cssText = 'width:100%;border:1px solid #d7dde4;border-radius:1.06667vw;padding:2.66667vw;font-size:3.73333vw;';
+    di.value = toDatetimeLocal(DATA[step.field]).split('T')[0];
+
+    var ti = document.createElement('input'); ti.type = 'time';
+    ti.style.cssText = 'width:100%;border:1px solid #d7dde4;border-radius:1.06667vw;padding:2.66667vw;font-size:3.73333vw;';
+    ti.value = toDatetimeLocal(DATA[step.field]).split('T')[1] || '00:00';
+
+    dw.appendChild(di); dw.appendChild(ti);
+    body.appendChild(dw);
+
+    // Store reference for validation on next
+    dw._dateInput = di; dw._timeInput = ti;
+    body._dtInputs = dw;
+  } else if (step.type === 'reason') {
+    var ta = document.createElement('textarea');
+    ta.style.cssText = 'width:100%;border:1px solid #d7dde4;border-radius:1.06667vw;padding:2.66667vw;font-size:3.73333vw;resize:vertical;min-height:16vw;font-family:inherit;';
+    ta.value = DATA[step.field];
+    body.appendChild(ta);
+    body._reasonInput = ta;
+  } else {
+    var input = document.createElement('input');
+    input.type = step.type === 'tel' ? 'tel' : 'text';
+    input.style.cssText = 'width:100%;border:1px solid #d7dde4;border-radius:1.06667vw;padding:2.66667vw;font-size:3.73333vw;outline:none;';
+    input.value = DATA[step.field] === '*****' ? '' : DATA[step.field];
+    if (step.field === 'urgencyMobile') { input.placeholder = '请输入11位手机号码'; }
+    body.appendChild(input);
+    body._textInput = input;
+    setTimeout(function(){ input.focus(); }, 300);
+  }
+
+  // Update buttons
+  document.getElementById('wizardBack').style.display = wizardIdx === 0 ? 'none' : '';
+  document.getElementById('wizardNext').textContent = wizardIdx === wizardSteps.length - 1 ? '完成' : '下一步';
+}
+
+function getWizardValue() {
+  var body = document.getElementById('wizardBody');
+  var step = wizardSteps[wizardIdx];
+  if (step.type === 'gender') return DATA.gender;
+  if (step.type === 'datetime' && body._dtInputs) {
+    var dv = body._dtInputs._dateInput.value;
+    var tv = body._dtInputs._timeInput.value;
+    if (!dv || !tv) return '';
+    var p = dv.split('-');
+    return p[1] + '-' + p[2] + ' ' + tv;
+  }
+  if (step.type === 'reason' && body._reasonInput) return body._reasonInput.value.trim();
+  if (body._textInput) return body._textInput.value.trim();
+  return '';
+}
+
+function wizardNext() {
+  var val = getWizardValue();
+  var step = wizardSteps[wizardIdx];
+
+  // Validation
+  if (!val) {
+    showToast(step.type === 'gender' ? '请选择性别' : '请填写' + step.title);
+    return;
+  }
+  if (step.field === 'urgencyMobile' && !/^\d{11}$/.test(val)) {
+    showToast('请填写正确的11位手机号码');
+    return;
+  }
+  if (step.field === 'leaveReason' && val.length <= 10) {
+    showToast('请假原因不能少于10个字');
+    return;
+  }
+
+  // Validate leave duration <= 3 days
+  if (step.field === 'startTime' || step.field === 'endTime') {
+    var st = step.field === 'startTime' ? val : DATA.startTime;
+    var et = step.field === 'endTime' ? val : DATA.endTime;
+    if (st && et && st !== '01-01 00:00' && et !== '01-02 00:00') {
+      var d = calcTimeDiff(st, et);
+      if (d) {
+        var days = parseInt(d);
+        if (!isNaN(days) && days > 3) {
+          showToast('可分多次请假，每次时长不超过三天');
+          return;
+        }
+      }
+    }
+  }
+
+  // Save
+  DATA[step.field] = val;
+  try { localStorage.setItem('leave_share_data', JSON.stringify(DATA)); } catch(e) {}
+
+  if (wizardIdx < wizardSteps.length - 1) {
+    wizardIdx++;
+    renderWizardStep();
+  } else {
+    // Done
+    document.getElementById('wizardOverlay').style.display = 'none';
+    refreshAll();
+    bindDblClick();
+    autoExport();
+  }
+}
+
+function wizardBack() {
+  if (wizardIdx > 0) {
+    wizardIdx--;
+    renderWizardStep();
+  }
+}
+
+document.getElementById('wizardNext').addEventListener('click', wizardNext);
+document.getElementById('wizardBack').addEventListener('click', wizardBack);
+document.getElementById('wizardOverlay').addEventListener('click', function(e){
+  if (e.target === this && wizardIdx === 0) return; // don't close on first step
+});
+
+// Auto-show wizard on load if data is empty
+if (shouldShowWizard()) {
+  setTimeout(showWizard, 500);
+}
+
 console.log('✅ NJIT 请假分享页面 - 双击可编辑版');
 console.log('📤 点击左上角"分享"选择转发方式');
+console.log('🪄 首次访问自动引导填写信息');
 })();
 </script>
 </body>
