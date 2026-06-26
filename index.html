@@ -7,7 +7,15 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<title>请假</title>
+<title>分享请假信息</title>
+<meta property="og:title" content="分享请假信息">
+<meta property="og:description" content="点击查看请假详情">
+<meta property="og:image" content="https://redbannersoverfuji.github.io/leave/icon.svg">
+<meta property="og:url" content="https://redbannersoverfuji.github.io/leave">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="今日校园">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="description" content="点击查看请假详情">
 <link rel="icon" href="https://counselor-front.campusphere.net/wec-counselor-leave-apps/prod/prod_v2.3.130_nTCi/leave/favicon.ico">
 <style>
 /* ===== Reset & Base (exact from original) ===== */
@@ -1164,8 +1172,8 @@ function downloadFile(blob, name) {
   setTimeout(function(){ URL.revokeObjectURL(url); }, 2000);
 }
 
-var LEAVE_URL = 'https://redbannersoverfuji.github.io/leave';
-var CARD_URL  = 'https://redbannersoverfuji.github.io/leave/card.html';
+var LEAVE_URL = 'https://redbannersoverfuji.github.io/leave?t=' + Date.now();
+var CARD_URL  = 'https://redbannersoverfuji.github.io/leave/card.html?t=' + Date.now();
 
 function shareToChannel(url, title, text) {
   document.getElementById('shareOverlay').style.display = 'none';
