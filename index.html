@@ -1164,23 +1164,38 @@ function downloadFile(blob, name) {
   setTimeout(function(){ URL.revokeObjectURL(url); }, 2000);
 }
 
+var LEAVE_URL = 'https://redbannersoverfuji.github.io/leave';
+var CARD_URL  = 'https://redbannersoverfuji.github.io/leave/card.html';
+
+function shareToChannel(url, title, text) {
+  document.getElementById('shareOverlay').style.display = 'none';
+  if (navigator.share) {
+    navigator.share({ title: title, text: text, url: url }).catch(function(){});
+  } else {
+    // Fallback: copy link
+    var ta = document.createElement('textarea');
+    ta.value = url;
+    ta.style.position = 'fixed'; ta.style.opacity = '0';
+    document.body.appendChild(ta);
+    ta.select(); document.execCommand('copy');
+    document.body.removeChild(ta);
+    showToast('链接已复制，请粘贴发送');
+  }
+}
+
 document.getElementById('shareWechat').addEventListener('click', function(){
   if (shareFormat === 'link') {
-    var blob = buildHtmlBlob();
-    doShare(blob, '请假可编辑版.html', '请假信息（可编辑）');
+    shareToChannel(LEAVE_URL, '请假信息', '点击查看请假详情（可编辑）');
   } else {
-    var blob = buildReadonlyCard();
-    doShare(blob, '请假分享卡片.html', '请假信息（仅查看）');
+    shareToChannel(CARD_URL, '分享请假信息', '点击查看请假详情');
   }
 });
 
 document.getElementById('shareQQ').addEventListener('click', function(){
   if (shareFormat === 'link') {
-    var blob = buildHtmlBlob();
-    doShare(blob, '请假可编辑版.html', '请假信息（可编辑）');
+    shareToChannel(LEAVE_URL, '请假信息', '点击查看请假详情（可编辑）');
   } else {
-    var blob = buildReadonlyCard();
-    doShare(blob, '请假分享卡片.html', '请假信息（仅查看）');
+    shareToChannel(CARD_URL, '分享请假信息', '点击查看请假详情');
   }
 });
 
